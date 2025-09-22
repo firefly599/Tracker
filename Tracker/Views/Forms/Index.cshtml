@@ -10,18 +10,21 @@
 
 <h2>Forms Page</h2>
 
-
+@model Tracker.Models.FormData
 <form asp-controller="Forms" asp-action="Submit" method="post">
     <div>
         <label for="name">Name:</label>
-        <input type="text" id="name" name="Name" />
+        <input type="text" id="Name" asp-for="Name" />
     </div>
 
     <div>
         <label for="age">Age:</label>
-        <input type="number" id="age" name="Age" />
+        <input type="number" id="Age" asp-for="Age" />
     </div>
 
     <button type="submit">Submit</button>
 
 </form>
+
+<br />
+<a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Home</a>

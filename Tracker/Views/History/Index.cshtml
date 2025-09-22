@@ -1,5 +1,60 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
 @{
+    ViewData["Title"] = "Submitted Forms";
+
 }
+@model List<Tracker.Models.FormData>
+
+<h2>Submitted Froms</h2>
+
+@if (Model  == null || !Model.Any())
+{
+    <p>No forms submitted yet.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var form in Model)
+            {
+                <tr>
+                    <td>@form.Name</td>
+                    <td>@form.Age</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<div class="d-flex gap-2">
+    <!-- Delete all data button -->
+    <form asp-controller="Settings" asp-action="Purge" method="post" onsubmit="return confirmDelete();">
+        <button type="submit" class="btn btn-danger">Delte all data</button>
+
+    </form>
+
+    <!-- Populate dummy data button -->
+    <form asp-controller="History" asp-action="PopulateDummy" method="post">
+        <button type="submit" class="btn btn-secondary">Populate dummy data</button>
+
+    </form>
+</div>
+
+<br />
+<a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Home</a>
+
+<!-- Page scripts -->
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete all data? This action cannot be undone.");
+    }
+</script>
